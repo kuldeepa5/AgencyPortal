@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="AgencyPortaXaf">
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="21.1.4.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="Company_LookupListView" AllowNew="False" />
+    <ListView Id="Employee_LookupListView" AllowNew="False" />
+  </Views>
+</Application>
