@@ -29,6 +29,15 @@ namespace AgencyPortaXaf.Blazor.Server {
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
 
+            
+
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
+            services.AddHttpContextAccessor();
+            services.AddSingleton<XpoDataStoreProviderAccessor>();
+            services.AddScoped<CircuitHandler, CircuitHandlerProxy>();
+            services.AddXaf<AgencyPortaXafBlazorApplication>(Configuration);
+
             services.AddXafSecurity(options =>
             {
                 options.Events.OnSecurityStrategyCreated = securityStrategy =>
@@ -46,12 +55,9 @@ namespace AgencyPortaXaf.Blazor.Server {
                 options.LogonParametersType = typeof(CustomLogonParameters);
             });
 
-            services.AddRazorPages();
-            services.AddServerSideBlazor();
-            services.AddHttpContextAccessor();
-            services.AddSingleton<XpoDataStoreProviderAccessor>();
-            services.AddScoped<CircuitHandler, CircuitHandlerProxy>();
-            services.AddXaf<AgencyPortaXafBlazorApplication>(Configuration);
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+                options.LoginPath = "/LoginPage";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
